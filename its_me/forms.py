@@ -9,12 +9,6 @@ class ProfileForm(forms.ModelForm):
 		exclude = ["owner"]
 
 
-class PostForm(forms.ModelForm):
-	class Meta:
-		model = Post
-		fields = "__all__"
-		exclude = ["post"]
-
 class UserLoginForm(forms.Form):
 	username= forms.CharField(required=True)
 	password= forms.CharField(required=True, widget=forms.PasswordInput())
@@ -27,3 +21,9 @@ class UserSignupForm(forms.ModelForm):
 		widgets= {
 			'password': forms.PasswordInput()
 		}
+
+class PostForm(forms.ModelForm):
+	class Meta:
+		model = Post
+		exclude = ['owner']
+

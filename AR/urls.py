@@ -17,15 +17,25 @@ from django.contrib import admin
 from django.urls import path
 from its_me import views 
 from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/',admin.site.urls),
-    path('list/',views.list_profile ),
+    path('list/',views.list_profile, name='profile_list'),
     path('detail/<int:profile_id>/', views.detail_profile, name='detail_profile'),
-    path('signup/',views.signup_profile),
+    path('signup/',views.signup_profile, name='register'),
     path('create/',views.create_profile, name='create_profile'),
-    path('login/',views.login_profile),
+    path('login/',views.login_profile, name='login'),
     path('logout/',views.logout_profile),
-    path('delete/<int:profile_id>/',views.delete_profile),
+    path('delete/<int:profile_id>/',views.delete_profile, name='profile_delete'),
     path('update/<int:profile_id>/',views.update_profile, name='update_profile'),  
+    path('post/list/<int:profile_id>',views.posts_list, name ='post_list'),
+    path('post/create/<int:profile_id>',views.create_post, name ='create_post'),
+    path('post/update/<int:profile_id>/<int:post_id>',views.update_post, name ='update_post'),
+    path('post/delete/<int:post_id>',views.delete, name='delete_post'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
