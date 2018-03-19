@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+	<form action="{% url 'update_profile' profile_id=profile_id.id %}" method="POST">
+		{{form|crispy}}
+		{% csrf_token %}
+
+		<input type="submit" value="Save">
+	</form>
+	<a href="delete/{{ profile_id.id }}/"><button> Delete </button></a>
+	<a href="/list/"><button> Cancel </button></a>
+
+{% endblock content %}
