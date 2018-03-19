@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block base %}
+<form action="{% url 'update_post' profile_id=profile_obj.id post_id=post_obj.id %}" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Update">
+</form>
+
+{% endblock base%}
