@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block base %}
 
-		name: {{ detail.name }}<br><br>
-		img: {{ detail.img}}<br><br>
-		post: {{ detail.post }}<br><br>
-		last_updated: {{ detail.last_updated }}<br><br>
-		auther: {{ detail.owner}}<br><br>
+		name: {{ profile.name }}<br><br>
+		img: {{ profile.img}}<br><br>
+		last_updated: {{ profile.last_updated }}<br><br>
+		auther: {{ profile.owner}}<br><br>
 
 		<a class=""><i class="far fa-heart"></i></a><br><br>
 		<a href="/list/"><button> Back </button></a>
+		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
 
-{% endblock content%}
+		<br>
+
+		{% for post in posts%}
+		{{post.title}}<br><br>
+		{{post.img}}<br><br>
+		{{post.content}}<br><br>
+		{% endfor %}
+
+{% endblock base%}

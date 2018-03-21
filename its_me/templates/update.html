@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block base %}
 
 	<form action="{% url 'update_profile' profile_id=profile_id.id %}" method="POST">
 		{{form|crispy}}
@@ -12,4 +12,4 @@
 	<a href="delete/{{ profile_id.id }}/"><button> Delete </button></a>
 	<a href="/list/"><button> Cancel </button></a>
 
-{% endblock content %}
+{% endblock base %}

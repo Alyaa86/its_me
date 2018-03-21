@@ -1,9 +1,39 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block base %}
 
 	{% for object in list %}
+	<div class="card-body">
 		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.name }}</a><br>
+		<a href="{% url 'follow' profile_id=object.id%}" class="btn btn-primary">Follow</a>
+	</div>
 	{% endfor %}
 
-{% endblock content %}
+	<!-- post that i follow  -->
+	<!-- my posts -->
+
+	<script>
+	function i_clicked(id)
+	{
+		$.ajax({
+			type:"GET",
+			url:"/follow/"+id,
+			error:function(){
+				console.log("not following yet!!")
+			},
+			success:function(data){
+				console.log(data);
+				// $("#star-number").text(data.count)
+				// if (data.action==="following") {
+					// alert('You favourited this Restaurant');
+					// $("#star-color").addClass("text-warning")
+				}
+				// else{
+				// 	$("#star-color").removeClass("text-warning")
+				// }
+			},
+		})
+	}
+</script>
+
+{% endblock base %}

@@ -29,10 +29,13 @@ urlpatterns = [
     path('logout/',views.logout_profile),
     path('delete/<int:profile_id>/',views.delete_profile, name='profile_delete'),
     path('update/<int:profile_id>/',views.update_profile, name='update_profile'),  
-    path('post/list/<int:profile_id>',views.posts_list, name ='post_list'),
     path('post/create/<int:profile_id>',views.create_post, name ='create_post'),
     path('post/update/<int:profile_id>/<int:post_id>',views.update_post, name ='update_post'),
     path('post/delete/<int:post_id>',views.delete, name='delete_post'),
+    path('follow/<int:profile_id>',views.follow, name ='follow'),
+    path('following/<int:profile_id>',views.following_list, name ='following'),
+    path('followers/<int:profile_id>',views.follower_list, name ='followers'),
+
 ]
 
 if settings.DEBUG:

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block base %}
 	<h3>Add New Profile:</h3>
-	<form action="/create/" method="POST">
+	<form action="/create/" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form|crispy }}
 		<input type="submit" value="Create">
 	</form>
-{% endblock content%}
+{% endblock base%}
