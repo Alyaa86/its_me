@@ -6,7 +6,7 @@ class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = "__all__" 
-		exclude = ["profile_owner"]
+		exclude = ["owner"]
 
 
 class UserLoginForm(forms.Form):
@@ -25,4 +25,4 @@ class UserSignupForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
 	class Meta:
 		model = Post
-		exclude = ['post_owner']
+		exclude = ['owner']

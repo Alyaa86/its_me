@@ -35,6 +35,7 @@ urlpatterns = [
     path('follow/<int:profile_id>',views.follow, name ='follow'),
     path('following/<int:profile_id>',views.following_list, name ='following'),
     path('followers/<int:profile_id>',views.follower_list, name ='followers'),
+    path('feeds/<int:profile_id>',views.feeds, name ='feeds'),
 
 ]
 

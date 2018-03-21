@@ -26,3 +26,4 @@ class Follow(models.Model):
 	# following= models.Bool
 
 # User.add_to_class('following', models.ManyToManyField('self', through=Follow, related_name='followers',symmetrical=False))
+
