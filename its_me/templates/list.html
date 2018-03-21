@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block base %}
 
 	{% for object in list %}
-		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.name }}</a><br>
+
+	<div class="d-flex">
+		
+			<div class="p-2"><a href="{% url 'detail_profile' profile_id=object.id %}"><li>{{ object.name }}</li></div>
+		
+	</div>
+
 	{% endfor %}
 
-{% endblock content %}
+{% endblock base %}
