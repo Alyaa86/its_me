@@ -5,11 +5,51 @@
 	{% for object in list %}
 
 	<div class="d-flex">
+		<h1>It's Me!!! <span class="badge badge-secondary">{{ object.name }}</span></h1>
 		
-			<div class="p-2"><a href="{% url 'detail_profile' profile_id=object.id %}"><li>{{ object.name }}</li></div>
-		
+		<div class="p-2"></div>
 	</div>
 
+
+	<!-- <div class="d-flex">
+		
+		<div class="p-2"><a href="{% url 'detail_profile' profile_id=object.id %}"><li>{{ object.name }}</li></div>
+		
+	</div> -->
+
+	<div class="card-body">
+
+		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.name }}</a><br>
+		<a href="{% url 'follow' profile_id=object.id%}" class="btn btn-primary">Follow</a>
+
+	</div>
 	{% endfor %}
 
-{% endblock base %}
+	<!-- post that i follow  -->
+	<!-- my posts -->
+
+	<script>
+		function i_clicked(id)
+		{
+			$.ajax({
+				type:"GET",
+				url:"/follow/"+id,
+				error:function(){
+					console.log("not following yet!!")
+				},
+				success:function(data){
+					console.log(data);
+					// $("#star-number").text(data.count)
+					// if (data.action==="following") {
+						// alert('You favourited this Restaurant');
+						// $("#star-color").addClass("text-warning")
+					}
+					// else{
+					// 	$("#star-color").removeClass("text-warning")
+					// }
+				},
+			})
+		}
+	</script>
+
+{% endblock base%}

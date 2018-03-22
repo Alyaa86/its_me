@@ -7,7 +7,7 @@
 		{{form|crispy}}
 		{% csrf_token %}
 
-		<input type="submit" value="Save">
+		<input type="submit" value="Save" name="update">
 	</form>
 	<a href="delete/{{ profile_id.id }}/"><button> Delete </button></a>
 	<a href="/list/"><button> Cancel </button></a>
