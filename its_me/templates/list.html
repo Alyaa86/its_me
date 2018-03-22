@@ -9,24 +9,13 @@
 		
 		<div class="p-2"></div>
 	</div>
-
-
-	<!-- <div class="d-flex">
-		
-		<div class="p-2"><a href="{% url 'detail_profile' profile_id=object.id %}"><li>{{ object.name }}</li></div>
-		
-	</div> -->
-
 	<div class="card-body">
 
 		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.name }}</a><br>
-		<a href="{% url 'follow' profile_id=object.id%}" class="btn btn-primary">Follow</a>
+		<a href="{% url 'follow' profile_id=object.id%}" class="btn btn-primary" onclick="i_clicked({{object.id}})">Follow</a>
 
 	</div>
 	{% endfor %}
-
-	<!-- post that i follow  -->
-	<!-- my posts -->
 
 	<script>
 		function i_clicked(id)
@@ -39,14 +28,12 @@
 				},
 				success:function(data){
 					console.log(data);
-					// $("#star-number").text(data.count)
-					// if (data.action==="following") {
-						// alert('You favourited this Restaurant');
-						// $("#star-color").addClass("text-warning")
+					if (data.action==="following") {
+						$("#follow").text("following")
 					}
-					// else{
-					// 	$("#star-color").removeClass("text-warning")
-					// }
+					else{
+						$("#follow").removeClass("following")
+					}
 				},
 			})
 		}

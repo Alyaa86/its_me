@@ -5,13 +5,11 @@
 
 	<h1> create your post </h1>
 	<div>
-		<form action="{% url 'create_post' profile_id=profile.id %}" method="POST" enctype="multipart/form-data">
-			<div>
-				{% csrf_token %}
-				{{form|crispy}}
-				<input type="submit" value="Create">
-			</div>
-		</form>
+		<form action="{% url 'create_post' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn btn-outline-success" value="Create">
+	</form>
 	</div>
 
 {% endblock base %}

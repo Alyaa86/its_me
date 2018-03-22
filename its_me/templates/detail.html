@@ -2,79 +2,32 @@
 
 {% block base %}
 
-{% comment %}
-
-<!-- <div class="d-flex">
-	<h1> Welcome!...    It's Me!!! <span class="badge badge-secondary">{{ object.name }}</span></h1>
-	
-  <div class="p-2"></div>
-  </div>
-
-		NAME: {{ detail.name }}<br><br>
-		IMG: {{ detail.img}}<br><br>
-		LAST UPDATE: {{ detail.last_updated }}<br><br>
-		auther: {{ detail.owner}}<br><br>
-
-<<<<<<< HEAD
-		<a class=""><i class="far fa-heart"></i></a><br><br>
-		<a href="{% url 'profile_list' %}"><button> Back </button></a>
-		<a href="{% url 'create_post' profile_id=detail.id%}"class="btn btn-primary"> create post </a><br> -->
-<!-- ======= -->
-		<a href="/list/"><button> Back </button></a>
-		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
-<!-- >>>>>>> 37c78e6e9c6f4633376974de01936d87e08fb228 -->
-
-<!-- {% for post in posts %}
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{post.img}}" alt="Card image cap">
-  <div class="card-body">
-	<h5 class="card-title">{{post.title}}</h5>
-	<p class="card-text">{{post.content}}</p><br>
-	<a href="{% url 'update_post' post_id=post.id  %}"class="btn btn-primary"> Update </a><br>
-	<a href="{% url 'delete_post' post_id=post.id  %}"class="btn btn-primary"> Delete </a><br>
-  </div>
-</div>
-{% endfor %}
-
-	<a href="{% url 'profile_list' %}"class="btn btn-primary"> Back </a><br>
-
- -->
- <!-- {% for post in posts%}
-		{{post.title}}<br><br>
-		{{post.img}}<br><br>
-		{{post.content}}<br><br>
-		{% endfor %}
-
-		<a class=""><i class="far fa-heart"></i></a><br><br>
-		<a href="/list/"><button> Back </button></a>
-		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
-
-		<br> -->
-{% endcomment %}
 <div class="d-flex">
 		<h1>It's Me!!! <span class="badge badge-secondary">{{ profile.name }}</span></h1>
 		
 		<div class="p-2"></div>
+		<a href="{% url 'update_profile' profile_id=profile_obj.id %}" class="btn btn-outline-info">Update</a><br>
 	</div>
-
-		<!-- NAME: {{ profile.name }}<br> -->
-		IMAGE: {{ profile.img}}<br>
-		LAST UPDATED: {{ profile.last_updated }}<br>
 		AUTHER: {{ profile.owner}}<br>
+		LAST UPDATED: <footer class="blockquote-footer">{{ profile.last_updated }}</footer><br>
+		<p class="card-text">Image: {% if profile.image %}
+			<img class="card-img-top" src="{{profile.image.url}}" alt="Card image cap"></img>
+		{% endif %}
+		</p>
 
-		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
+		<a href="{% url 'create_post' %}" class="btn btn-outline-success"><button>  Create Post </button></a>
 
 		
 
 	<div class="card" style="width: 18rem;">
 		{% for post in posts%}
-		<img class="card-img-top" src="{{post.img}}" alt="Card image cap">
+		<img class="card-img-top" src="{{post.img}}" alt="Card image cap"></img>
 		<div class="card-body">
 			<h5 class="card-title">{{post.title}}</h5>
 			<p class="card-text">{{post.content}}</p>
-			
-			<a href="/list/">Back</a>
-			<a href="{% url 'update_post' post_id=post.id %}">Update</a><br>
+			LAST UPDATED: <footer class="blockquote-footer">{{ post.last_updated }}</footer><br>
+			<a href="/list/" class="btn btn-light">Back</a>
+			<a href="{% url 'update_post' post_id=post.id %} class="btn btn-outline-info"">Update</a><br>
 			
 		</div>
 	</div>

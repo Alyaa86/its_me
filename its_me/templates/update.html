@@ -3,7 +3,7 @@
 
 {% block base %}
 
-	<form action="{% url 'update_profile' profile_id=profile_id.id %}" method="POST">
+	<form action="{% url 'update_profile' profile_id=profile_obj.id %}" method="POST">
 		{{form|crispy}}
 		{% csrf_token %}
 
