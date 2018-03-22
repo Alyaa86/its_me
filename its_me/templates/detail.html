@@ -3,17 +3,24 @@
 {% block base %}
 
 		name: {{ profile.name }}<br><br>
-		img: {{ profile.img}}<br><br>
 		last_updated: {{ profile.last_updated }}<br><br>
 		auther: {{ profile.owner}}<br><br>
+		<p class="card-text">Image: {% if profile.image %}
+			<img class="card-img-top" src="{{profile.image.url}}" alt="Card image cap">
+		{% endif %}
+		</p>
 
 		<a href="/list/"><button> Back </button></a>
-		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
+		<a href="{% url 'create_post' %}"><button>  Create Post </button></a>
 
 		<br>
 
 		{% for post in posts%}
 		{{post.title}}<br><br>
+		<p class="card-text">Image: {% if post.image %}
+			<img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+		{% endif %}
+		</p>
 		{{post.img}}<br><br>
 		{{post.content}}<br><br>
 		{% endfor %}
