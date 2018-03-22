@@ -48,3 +48,20 @@
   </div>
 </div>
 {% endblock base%} -->
+
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src= '{{ detail.img}}' alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"> {{ detail.name }} </h5>
+    <p class="card-text"> {{ detail.post }} </p>
+  </div>
+
+  <div class="card-body">
+    <a href="{% url 'delete' profile_id=object.id %}" class="card-link"> Delete </a>
+    <a href="{% url 'update_post' profile_id=object.id %}" class="card-link"> Update </a>
+    <a href="{% url 'detail_profile' profile_id=object.id %}" class="card-link"> Back </a>
+  </div>
+</div>
+
+{% endblock base%}

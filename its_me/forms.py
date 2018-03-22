@@ -6,8 +6,10 @@ class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = "__all__" 
-		exclude = ["profile_owner"]
-
+		exclude = ["owner"]
+		widgets= {
+			'brain_test':forms.RadioSelect()
+		}
 
 class UserLoginForm(forms.Form):
 	username= forms.CharField(required=True)
@@ -25,4 +27,12 @@ class UserSignupForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
 	class Meta:
 		model = Post
-		exclude = ['post_owner']
+		exclude = ['owner']
+class UserSignupForm(forms.ModelForm):
+	class Meta:
+		model= User
+		fields= ['username', 'first_name', 'last_name', 'email', 'password']
+
+		widgets= {
+			'password': forms.PasswordInput()
+		}

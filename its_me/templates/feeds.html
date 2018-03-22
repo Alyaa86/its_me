@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block base %}
+{% for post in feeds %}
+
+{{post.title}}<br>
+{{post.content}}<br>
+{{post.img}}<br>
+{% endfor%}
+
+{% endblock base %}

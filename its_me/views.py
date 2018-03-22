@@ -73,7 +73,9 @@ def create_profile(request):
 	if request.method == 'POST':
 		form = ProfileForm(request.POST)
 		if form.is_valid():
-			form.save()
+			profile = form.save(commit=False)
+			profile.owner = request.user
+			profile.save()
 			return redirect('/list/')
 	context={
 		'form':form
@@ -203,6 +205,7 @@ def follow (request, profile_id):
 def following_list(request, profile_id):
 	profile = Profile.objects.get(id=profile_id)
 	user = profile.owner
+	print (profile)
 	i_follow = user.following.all()
 	# for following_obj in i_follow:
 	# 	return following_obj.user_from.all()
@@ -224,10 +227,57 @@ def follower_list(request, profile_id):
 	}
 	return render(request, 'followers.html', context)
 
+# <<<<<<< HEAD
 
 def home (request):
 
 	return render(request, 'home.html')
+# =======
+def feeds(request, profile_id):
+	# profile = Profile.objects.get(id=profile_id)
+	# user = profile.owner
+	# i_follow = user.following.all()
+	# print (i_follow)
+	# feeds = Post.objects.filter(id__in=i_follow)
+
+	following = request.user.following.all()
+	list = []
+	for i in following:
+		list.append(i.user_to.profile_set.all()[0])
+
+	feeds = Post.objects.filter(owner__in=list)
+
+
+	# profile = Profile.objects.get(id=profile_id)
+	# user = profile.owner
+	# i_follow = user.following.all()
+	# feeds = Post.objects.filter(i_follow)
+	# # # we want to disply the feeds of ppl i follow 
+	# # feeds= Post.i_follow.all()
+
+	context={
+		'feeds':feeds,
+	}
+
+	return render (request, 'feeds.html', context)
+
+
+
+# def follow (request, profile_id):
+# 	profile = Profile.objects.get(id=profile_id)
+# 	user = profile.owner
+# 	follow_obj, created=Follow.objects.get_or_create(user_from=request.user, user_to=user)
+# 	if created:
+# 		action="follow"
+# 	else:
+# 		action="unfollow"
+# 		follow_obj.delete()
+
+# 	#check if there is a follow_obj exsist
+
+
+# 	return redirect('detail_profile',profile_id=profile_id)
+# >>>>>>> 37c78e6e9c6f4633376974de01936d87e08fb228
 	
 #nbi nsawi list 
 	# following_list = Follow.objects.filter(id)

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title> create your post </title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block base %}
+
+
+	<h1> create your post </h1>
 	<div>
 		<form action="{% url 'create_post' profile_id=profile.id %}" method="POST" enctype="multipart/form-data">
 			<div>
@@ -13,5 +13,5 @@
 			</div>
 		</form>
 	</div>
-</body>
-</html>
+
+{% endblock base %}

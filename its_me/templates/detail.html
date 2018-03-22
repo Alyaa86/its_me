@@ -15,9 +15,14 @@
 		LAST UPDATE: {{ detail.last_updated }}<br><br>
 		auther: {{ detail.owner}}<br><br>
 
+<<<<<<< HEAD
 		<a class=""><i class="far fa-heart"></i></a><br><br>
 		<a href="{% url 'profile_list' %}"><button> Back </button></a>
 		<a href="{% url 'create_post' profile_id=detail.id%}"class="btn btn-primary"> create post </a><br> -->
+<!-- ======= -->
+		<a href="/list/"><button> Back </button></a>
+		<a href="{% url 'create_post' profile_id=profile.id %}"><button>  Create Post </button></a>
+<!-- >>>>>>> 37c78e6e9c6f4633376974de01936d87e08fb228 -->
 
 <!-- {% for post in posts %}
 <div class="card" style="width: 18rem;">

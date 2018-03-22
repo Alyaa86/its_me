@@ -1,9 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+brain_test = (
+	('L','mostly left'),
+	('R','mostly right'),
+	('R&L','both equal'),
+)
+
 class Profile(models.Model):
 	name = models.CharField(max_length=500)
+	DOB= models.DateField(null=True)
 	img = models.ImageField(null=True, blank=True)
+	brain_test= models.CharField(max_length=500, choices=brain_test)	
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
 
@@ -26,3 +35,4 @@ class Follow(models.Model):
 	# following= models.Bool
 
 # User.add_to_class('following', models.ManyToManyField('self', through=Follow, related_name='followers',symmetrical=False))
+
