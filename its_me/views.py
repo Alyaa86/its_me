@@ -19,7 +19,7 @@ def list_profile(request):
 
 def detail_profile(request, profile_id):
 	profile_obj = Profile.objects.get(id=profile_id)
-	posts = Post.objects.filter(owner=profile_obj) 
+	posts = Post.objects.filter(owner=profile_id) 
 	context = {
 		'posts':posts,
 		'profile':profile_obj,
@@ -136,19 +136,17 @@ def create_post(request, profile_id):
 
 	return render (request, 'create_post.html', context)
 
-# def posts_list(request,profile_id):
-# 	profile_obj = Profile.objects.get(id=profile_id)
-# 	posts = Post.objects.filter(owner=profile_obj) 
-# 	context = {
-# 		'posts':posts
-# 	}
-
-# 	return render (request, 'list.html', context)
-
-def update_post(request, post_id, profile_id):
+def posts_list(request,profile_id):
 	profile_obj = Profile.objects.get(id=profile_id)
-	posts = Post.objects.filter(owner=profile_obj)
-	post_obj = posts.get(id=post_id)
+	posts = Post.objects.filter(owner=profile_id) 
+	context = {
+		'posts':posts
+	}
+
+	return render (request, 'posts_list.html', context)
+
+def update_post(request, post_id):
+	post_obj = Post.objects.get(id=post_id)
 	form = PostForm(instance=post_obj)
 	if request.method == 'POST':
 		form = PostForm(request.POST, request.FILES or None, instance= post_obj)
@@ -162,7 +160,6 @@ def update_post(request, post_id, profile_id):
 	context= {
 		'form':form,
 		'post_obj':post_obj,
-		'profile_obj':profile_obj
 	}
 
 	return render (request, 'update_post.html', context)
@@ -182,50 +179,50 @@ def follow (request, profile_id):
 		action="unfollow"
 		follow_obj.delete()
 
-	#check if there is a follow_obj exsist
-
+		context={
+			'action':action
+		}
 
 	return redirect('detail_profile',profile_id=profile_id)
 
-def following_list(request, profile_id):
-	profile = Profile.objects.get(id=profile_id)
-	user = profile.owner
-	print (profile)
-	i_follow = user.following.all()
-	# for following_obj in i_follow:
-	# 	return following_obj.user_from.all()
+def following_list(request, user_id):
+	user = User.objects.get(id=user_id)
+	following = user.rel_following.all()
+	following_list = []
+	for i in following:
+		following_list.append(i.user_to)
+	
 	context={
-		'following':i_follow,
-		'profile_id':profile_id
+		'following':following
 	}
 	return render(request, 'following.html', context)
+	
 
-def follower_list(request, profile_id):
-	profile = Profile.objects.get(id=profile_id)
-	user = profile.owner
-	followers = user.followed_by.all()
-	# for following_obj in i_follow:
-	# 	return following_obj.user_from.all()
+def follower_list(request, user_id):
+	user = User.objects.get(id=user_id)
+	followers = request.user.rel_followed_by.all()
+	follower_list = []
+	for i in followers:
+		follower_list.append(i.user_from)
 	context={
 		'followers':followers,
-		'profile_id':profile_id
 	}
 	return render(request, 'followers.html', context)
 
-def feeds(request, profile_id):
+def feeds(request):
 	# profile = Profile.objects.get(id=profile_id)
 	# user = profile.owner
 	# i_follow = user.following.all()
 	# print (i_follow)
 	# feeds = Post.objects.filter(id__in=i_follow)
 
-	following = request.user.following.all()
-	list = []
+	following = request.user.rel_following.all()
+	following_list = []
 	for i in following:
-		list.append(i.user_to.profile_set.all()[0])
+		following_list.append(i.user_to)
 
-	feeds = Post.objects.filter(owner__in=list)
-
+	feeds = Post.objects.filter(owner__in=following_list)
+	
 
 	# profile = Profile.objects.get(id=profile_id)
 	# user = profile.owner

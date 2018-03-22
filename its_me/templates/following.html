@@ -4,8 +4,9 @@
 
 	{% for object in following %}
 	<div class="card-body">
-		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.user_from }}</a><br>
+		<a href="{% url 'detail_profile' profile_id=object.id %}">{{ object.user_to }}</a><br>
 	</div>
+
 	{% endfor %}
 
 {% endblock base %}
